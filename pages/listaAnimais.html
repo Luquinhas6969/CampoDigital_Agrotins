@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Animais</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#e8f5e9;
+text-align:center;
+}
+
+h1{
+margin-top:40px;
+}
+
+input{
+
+padding:10px;
+width:250px;
+margin:20px;
+border-radius:5px;
+border:1px solid gray;
+
+}
+
+.card{
+
+background:#f0f0f0;
+width:300px;
+margin:20px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+
+}
+
+.excluir{
+
+background:red;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:5px;
+cursor:pointer;
+
+}
+
+.voltar{
+
+background:gray;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Animais</h1>
+
+<input id="pesquisa" placeholder="Pesquisar">
+
+<div id="lista"></div>
+
+<br>
+
+<button class="voltar" onclick="voltar()">
+Voltar
+</button>
+
+<script>
+
+let usuario = JSON.parse(localStorage.getItem("logado"));
+
+let chave = "animais_" + usuario.email;
+
+function mostrarAnimais(){
+
+let lista = JSON.parse(localStorage.getItem(chave)) || [];
+
+let pesquisa =
+document.getElementById("pesquisa")
+.value.toLowerCase();
+
+let html="";
+
+for(let i=0;i<lista.length;i++){
+
+let a=lista[i];
+
+if(
+
+a.nome.toLowerCase().includes(pesquisa) ||
+
+a.especie.toLowerCase().includes(pesquisa)
+
+){
+
+html+=`
+
+<div class="card">
+
+<b>Nome do animal:</b> ${a.nome}
+
+<br>
+
+<b>Espécie:</b> ${a.especie}
+
+<br>
+
+<b>Nascimento:</b> ${a.nascimento}
+
+<br><br>
+
+<button class="excluir"
+onclick="excluir(${i})">
+
+Excluir
+
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
+document.getElementById("lista").innerHTML=html;
+
+}
+
+
+function excluir(i){
+
+let lista =
+JSON.parse(localStorage.getItem(chave)) || [];
+
+lista.splice(i,1);
+
+localStorage.setItem(chave,
+JSON.stringify(lista));
+
+mostrarAnimais();
+
+}
+
+
+function voltar(){
+
+window.location.href="dashboard.html";
+
+}
+
+
+document.getElementById("pesquisa")
+.addEventListener("keyup",
+mostrarAnimais);
+
+mostrarAnimais();
+
+</script>
+
+</body>
+
+</html>

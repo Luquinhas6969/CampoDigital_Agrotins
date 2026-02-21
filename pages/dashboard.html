@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f1f1f1;
+text-align:center;
+}
+
+.caixa{
+
+margin-top:50px;
+
+}
+
+button{
+
+width:250px;
+padding:15px;
+margin:10px;
+font-size:18px;
+background:green;
+color:white;
+border:none;
+border-radius:10px;
+
+}
+
+.sair{
+
+background:red;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="caixa">
+
+<h2 id="usuario"></h2>
+
+<h1>Sistema Agrícola</h1>
+
+<button onclick="location.href='culturas.html'">
+
+Culturas
+
+</button>
+
+<br>
+
+<button onclick="location.href='maquinas.html'">
+
+Máquinas
+
+</button>
+
+<br>
+
+<button onclick="location.href='animais.html'">
+
+Animais
+
+</button>
+
+<br>
+
+<button class="sair" onclick="sair()">
+
+Sair
+
+</button>
+
+</div>
+
+<script>
+
+let usuarioLogado=localStorage.getItem("logado");
+
+if(usuarioLogado==null){
+
+window.location.href="login.html";
+
+}
+
+let usuario=JSON.parse(usuarioLogado);
+
+document.getElementById("usuario").innerText=
+
+"Bem-vindo "+usuario.nome;
+
+function sair(){
+
+localStorage.removeItem("logado");
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>

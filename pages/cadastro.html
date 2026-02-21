@@ -1,1 +1,93 @@
-<!DOCKTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cadastro</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#e8f5e9;
+text-align:center;
+}
+
+.caixa{
+background:white;
+width:300px;
+margin:auto;
+margin-top:100px;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="caixa">
+
+<h2>Criar Conta</h2>
+
+<input id="nome" placeholder="Nome">
+
+<input id="email" placeholder="Email">
+
+<input id="senha" type="password" placeholder="Senha">
+
+<br>
+
+<button onclick="cadastrar()">Cadastrar</button>
+
+<h3 id="msg"></h3>
+
+<a href="login.html">Voltar ao Login</a>
+
+</div>
+
+<script>
+
+function cadastrar(){
+
+let nome=document.getElementById("nome").value;
+let email=document.getElementById("email").value;
+let senha=document.getElementById("senha").value;
+
+let usuario={
+
+nome:nome,
+email:email,
+senha:senha
+
+};
+
+localStorage.setItem(email,JSON.stringify(usuario));
+
+document.getElementById("msg").innerText="Conta criada!";
+
+}
+
+</script>
+
+</body>
+</html>

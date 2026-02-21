@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Relatórios</title>
+
+<style>
+
+table{
+
+border-collapse:collapse;
+width:100%;
+
+}
+
+td,th{
+
+border:1px solid black;
+padding:8px;
+
+}
+
+button{
+
+padding:5px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Relatórios</h2>
+
+<table>
+
+<tr>
+
+<th>Cultura</th>
+<th>Tipo</th>
+<th>Data</th>
+<th>Ação</th>
+
+</tr>
+
+<tbody id="tabela">
+
+</tbody>
+
+</table>
+
+<br>
+
+<a href="dashboard.html">Voltar</a>
+
+<script>
+
+let atividades=JSON.parse(localStorage.getItem("atividades"))||[];
+
+function mostrar(){
+
+tabela.innerHTML="";
+
+atividades.forEach((a,i)=>{
+
+tabela.innerHTML+=
+
+"<tr>"+
+
+"<td>"+a.cultura+"</td>"+
+
+"<td>"+a.tipo+"</td>"+
+
+"<td>"+a.data+"</td>"+
+
+"<td>"+
+
+"<button onclick='editar("+i+")'>Editar</button>"+
+
+"<button onclick='excluir("+i+")'>Excluir</button>"+
+
+"</td>"+
+
+"</tr>";
+
+});
+
+}
+
+function excluir(i){
+
+atividades.splice(i,1);
+
+localStorage.setItem("atividades",JSON.stringify(atividades));
+
+mostrar();
+
+}
+
+function editar(i){
+
+let nova=prompt("Nova cultura");
+
+atividades[i].cultura=nova;
+
+localStorage.setItem("atividades",JSON.stringify(atividades));
+
+mostrar();
+
+}
+
+mostrar();
+
+</script>
+
+</body>
+</html>

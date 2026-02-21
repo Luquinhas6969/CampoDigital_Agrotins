@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#e8f5e9;
+text-align:center;
+}
+
+.caixa{
+background:white;
+width:300px;
+margin:auto;
+margin-top:100px;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="caixa">
+
+<h2>Sistema Agrícola</h2>
+
+<form id="loginForm">
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="senha" placeholder="Senha">
+
+<br>
+
+<button>Entrar</button>
+
+</form>
+
+<h3 id="msg"></h3>
+
+<a href="cadastro.html">Criar conta</a>
+
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let emailDigitado=document.getElementById("email").value;
+let senhaDigitada=document.getElementById("senha").value;
+
+let usuarioSalvo=localStorage.getItem(emailDigitado);
+
+if(usuarioSalvo==null){
+
+document.getElementById("msg").innerText="Usuário não encontrado";
+
+}
+else{
+
+let usuario=JSON.parse(usuarioSalvo);
+
+if(usuario.senha==senhaDigitada){
+
+localStorage.setItem("logado",JSON.stringify(usuario));
+
+window.location.href="dashboard.html";
+
+}
+else{
+
+document.getElementById("msg").innerText="Senha incorreta";
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

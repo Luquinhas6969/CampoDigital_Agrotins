@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Lista de Culturas</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f1f1f1;
+text-align:center;
+}
+
+input{
+padding:10px;
+width:250px;
+margin:20px;
+}
+
+.card{
+background:white;
+width:300px;
+margin:auto;
+margin-top:10px;
+padding:15px;
+border-radius:10px;
+box-shadow:0px 0px 5px gray;
+}
+
+button{
+margin:5px;
+padding:5px 10px;
+border:none;
+border-radius:5px;
+}
+
+.excluir{
+background:red;
+color:white;
+}
+
+.voltar{
+background:gray;
+color:white;
+padding:10px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Culturas</h1>
+
+<input id="pesquisa" placeholder="Pesquisar" onkeyup="mostrarCulturas()">
+
+<div id="lista"></div>
+
+<br>
+
+<button class="voltar" onclick="location.href='culturas.html'">
+
+Voltar
+
+</button>
+
+<script>
+
+function mostrarCulturas(){
+
+let lista=JSON.parse(localStorage.getItem("culturas")||"[]");
+
+let pesquisa=document.getElementById("pesquisa").value.toLowerCase();
+
+let html="";
+
+for(let i=0;i<lista.length;i++){
+
+let c=lista[i];
+
+if(c.nome.toLowerCase().includes(pesquisa)){
+
+html+=`
+
+<div class="card">
+
+<b>Cultura:</b> ${c.nome} <br>
+
+<b>Plantio:</b> ${c.plantio} <br>
+
+<b>Colheita:</b> ${c.colheita} <br>
+
+<button class="excluir"
+onclick="excluir(${i})">
+
+Excluir
+
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
+document.getElementById("lista").innerHTML=html;
+
+}
+
+function excluir(i){
+
+let lista=JSON.parse(localStorage.getItem("culturas"));
+
+lista.splice(i,1);
+
+localStorage.setItem("culturas",JSON.stringify(lista));
+
+mostrarCulturas();
+
+}
+
+mostrarCulturas();
+
+</script>
+
+</body>
+</html>

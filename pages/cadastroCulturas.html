@@ -5,20 +5,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Cadastrar Máquina</title>
+<title>Cadastrar Cultura</title>
 
 <style>
 
 body{
-
 font-family:Arial;
 background:#e8f5e9;
 text-align:center;
-
 }
 
 .caixa{
-
 background:white;
 width:320px;
 margin:auto;
@@ -26,31 +23,24 @@ margin-top:60px;
 padding:20px;
 border-radius:15px;
 box-shadow:0px 0px 10px gray;
-
 }
 
 input{
-
 width:90%;
 padding:10px;
 margin:10px;
-
 }
 
 button{
-
 padding:10px 20px;
 background:green;
 color:white;
 border:none;
 border-radius:8px;
-
 }
 
 .voltar{
-
 background:gray;
-
 }
 
 </style>
@@ -61,17 +51,17 @@ background:gray;
 
 <div class="caixa">
 
-<h2>Cadastrar Maquina</h2>
+<h2>Cadastrar Cultura</h2>
 
-<input id="nome" placeholder="Nome da máquina">
+<input id="nome" placeholder="Nome da cultura">
 
-<input id="tipo" placeholder="Tipo">
+<input id="plantio" placeholder="Data do plantio">
 
-<input id="manutencao" placeholder="Manutenção">
+<input id="colheita" placeholder="Data da colheita">
 
 <br>
 
-<button onclick="salvarMaquina()">
+<button onclick="salvarCultura()">
 
 Salvar
 
@@ -79,7 +69,7 @@ Salvar
 
 <br><br>
 
-<button class="voltar" onclick="location.href='maquinas.html'">
+<button class="voltar" onclick="location.href='culturas.html'">
 
 Voltar
 
@@ -91,27 +81,27 @@ Voltar
 
 <script>
 
-function salvarMaquina(){
+function salvarCultura(){
 
 let nome=document.getElementById("nome").value;
-let tipo=document.getElementById("tipo").value;
-let manutencao=document.getElementById("manutencao").value;
+let plantio=document.getElementById("plantio").value;
+let colheita=document.getElementById("colheita").value;
 
-let maquina={
+let cultura={
 
 nome:nome,
-tipo:tipo,
-manutencao:manutencao
+plantio:plantio,
+colheita:colheita
 
 };
 
-let lista=JSON.parse(localStorage.getItem("maquinas")||"[]");
+let lista=JSON.parse(localStorage.getItem("culturas")||"[]");
 
-lista.push(maquina);
+lista.push(cultura);
 
-localStorage.setItem("maquinas",JSON.stringify(lista));
+localStorage.setItem("culturas",JSON.stringify(lista));
 
-msg.innerText="Máquina cadastrada!";
+msg.innerText="Cultura cadastrada!";
 
 }
 
